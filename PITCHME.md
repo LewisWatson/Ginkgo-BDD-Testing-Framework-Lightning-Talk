@@ -29,7 +29,7 @@ When: I eat the apple
 Then: I expect to be left with the core
 ```
 
-Notes:
+Note:
 
 Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by Golang application running inside a docker container. The test describes the behaviour and expected goal in using an english style description.
 
