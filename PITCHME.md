@@ -6,16 +6,15 @@
 
 ---
 
-## What is BDD?
+## Behaviour Driven Development
 
-- **B**ehaviour **D**riven **D**evelopment
 - A particular style of **T**est **D**riven **D**evelopment
 - Focuses on expected *behaviour* of a system
-- Uses non-technical language
+- Uses more natural english style language
 
 Note:
 
-Explain that BDD is a style of TDD that focuses on howw a system should be have.
+Explain that BDD is a style of TDD that focuses on how a system should behave.
 
 TDD is out of scope for this talk.
 
@@ -24,14 +23,14 @@ TDD is out of scope for this talk.
 ## Example
 
 ```plain
-Given: an apple
-When: I eat the apple
-Then: I expect to be left with the core
+Given: 5 apples
+When: I eat 2 apples
+Then: I expect to be left with 3 apples, and two apple cores.
 ```
 
 Note:
 
-Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by Golang application running inside a docker container. The test describes the behaviour and expected goal in using an english style description.
+Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by a Golang microsevice. The test describes the behaviour and expected goal using an english style description.
 
 ---
 
@@ -57,11 +56,14 @@ BDD tools can leverage given, when, then style of the tests to provide context w
 
 ## Useful way to tease out edge cases
 
+At the very least it is a useful methodology for working through the bahaviour of the system. Once you have sone test it is relatively easy to think of additional `when`'s for the `given`'s.
+
 +++
 
 ## When not to use BDD
 
-If you want compact and succinct tests.
+- If you want compact and succinct tests.
+- If you want to quickly test something very low level and technical.
 
 +++
 
