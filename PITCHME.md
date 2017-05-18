@@ -56,3 +56,37 @@ Well crafted BDD-style test tend to end up being very understandable and helps t
 BDD tools can leverage given, when, then style of the tests to provide context when test fail.
 
 ## Useful way to tease out edge cases
+
++++
+
+## When not to use BDD
+
+If you want compact and succinct tests.
+
++++
+
+## Golang BDD in the wild
+
+- Cloud Foundry
+  - Most of the projects
+- Kubernetes
+  - Only for integration and acceptance tests.
+- https://github.com/LewisWatson/carshare-back/
+- https://github.com/LewisWatson/firebase-jwt-auth
+
+---
+
+## BDD options in Golang
+
+Lots of options, but the main ones are
+
+- [GoConvey](http://goconvey.co/)
+- [Goblin](https://github.com/franela/goblin)
+- [Godog](https://data-dog.github.io/godog/)
+- [Ginkgo](https://onsi.github.io/ginkgo/)
+
+--- 
+
+# Ginko Demo
+
+![ginko logo](https://onsi.github.io/ginkgo/images/ginkgo.png)
