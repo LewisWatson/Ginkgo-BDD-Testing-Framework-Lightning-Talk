@@ -22,4 +22,4 @@ Generating ginkgo test for Keys in:
 
 Create a simple test to ensure no errors are returned
 
-[Continue to step 2](../step2)
+[Continue to step 3](../step3)
