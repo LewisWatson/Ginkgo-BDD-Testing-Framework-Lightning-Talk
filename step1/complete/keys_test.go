@@ -1,7 +1,7 @@
 package keys_test
 
 import (
-	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step1"
+	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step1/complete"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -9,7 +9,7 @@ import (
 
 var _ = Describe("Keys", func() {
 
-	var(
+	var (
 		keyURL = "blah.org"
 		// keys map[string]interface{}
 		// maxAge int64
