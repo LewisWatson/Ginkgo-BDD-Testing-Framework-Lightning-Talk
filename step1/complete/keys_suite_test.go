@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestStep1(t *testing.T) {
+func TestKeys(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Step2 Complete Suite")
+	RunSpecs(t, "Keys Suite")
 }

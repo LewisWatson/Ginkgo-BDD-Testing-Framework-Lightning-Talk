@@ -16,9 +16,9 @@ var (
 	token2    string
 )
 
-func TestStep3(t *testing.T) {
+func TestKeys(t *testing.T) {
 	RegisterFailHandler(Fail)
-	RunSpecs(t, "Step3 suite")
+	RunSpecs(t, "Keys suite")
 }
 
 var _ = BeforeSuite(func() {
