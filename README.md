@@ -10,8 +10,4 @@ View at [gitpitch.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk](h
 
 ## Demo
 
-```bash
-$ ginkgo bootstrap
-Generating ginkgo test suite bootstrap for keys in:
-    Ginkgo_BDD_Testing_Framework_Lightning_Talk_suite_test.go
-```
+See [Step 1](step1/)

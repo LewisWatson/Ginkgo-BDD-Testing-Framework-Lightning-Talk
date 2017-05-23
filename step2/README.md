@@ -21,3 +21,5 @@ Generating ginkgo test for Keys in:
 ## Then
 
 Create a simple test to ensure no errors are returned
+
+[Continue to step 2](../step2)
