@@ -13,5 +13,3 @@ Two "what if"'s are identified
 ## Then
 
 Create tests for the what is using scenarios.
-
-[Continue to step 3](../step3)
