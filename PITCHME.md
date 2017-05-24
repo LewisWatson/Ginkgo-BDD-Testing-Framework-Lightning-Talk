@@ -22,13 +22,15 @@ TDD is out of scope for this talk.
 
 ## Example
 
-```plain
-Scenario: In order to maximise our enjoyment of apples, we need to eat them two at a time.
-Given: 5 apples
-When: I eat 2 apples
-Then: I should have 3 apples
-Then: I should have 2 apple cores.
-```
+**Scenario** In order to maximise our enjoyment of apples, we need to eat them two at a time.
+
+**Given** 5 apples
+
+**When** I eat 2 apples
+
+**Then** I should have 3 apples
+
+**Then** I should have 2 apple cores.
 
 Note:
 
