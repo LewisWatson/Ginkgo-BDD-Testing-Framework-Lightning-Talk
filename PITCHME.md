@@ -20,14 +20,13 @@ TDD is out of scope for this talk.
 
 ## Example
 
-
-**Scenario** In order to maximise our enjoyment of apples, we need to eat them two at a time.
+**Scenario:** In order to maximise our enjoyment of apples, we need to eat them two at a time.
 
 ```
-Given 5 apples
-When I eat 2 apples
-Then I should have 3 apples
-Then I should have 2 apple cores
+Given: 5 apples
+When:  I eat 2 apples
+Then:  I should have 3 apples
+Then:  I should have 2 apple cores
 ```
 
 Note:
@@ -41,7 +40,6 @@ Stakeholder views
 - Developers might think apples are rows in a MySQL db, accessed by Golang Microservices
 - Algorithm engineers might think apples are somoe sort of mathematical concept in matlab.
 - The client might think that apples are apples, and that everyone else is crazy.
-
 
 Although there is nothing to stop us using some technical langauge, tailored to a particular audience.
 
@@ -57,9 +55,11 @@ Note:
 
 ## Working with stakeholders with differing specialities
 
-Non-technical stakeholders at least have a chance of understanding and being able to talk about BDD style tests. Requirements could also be captured in this style and directly implemeneted as tests.
+Gives all stakeholders a chance of understanding and being able to have meaningful discussions about BDD style tests. 
 
-Also useful for moving some techincal discussions away from low level technicallities, to a higher level "what are we trying to achieve here" style discussion. Anti-bike shedding.
+Some requirements could also be captured in this style and directly implemeneted as tests.
+
+Useful for moving techincal discussions away from low level technicallities, to a higher level "what are we trying to achieve here" style discussion. Anti-bike shedding.
 
 ## Want descriptive, specification style tests
 
@@ -79,10 +79,6 @@ At the very least it is a useful methodology for working through the behaviour o
 - If you want to quickly test something very low level and technical.
 
 ---
-
-## Golang BDD
-
-+++
 
 ## Golang BDD in the wild
 
