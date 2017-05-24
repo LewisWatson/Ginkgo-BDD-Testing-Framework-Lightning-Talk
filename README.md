@@ -8,6 +8,20 @@ Created for [Edinburgh Golang Meetup](https://www.meetup.com/Edinburgh-Golang-me
 
 View at [gitpitch.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk](https://gitpitch.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk)
 
+### To view offline with notes
+
+Download the zip from gitpitch. Extract to a directory then run from a web server
+
+```bash
+wget https://gitpitch.com/pitchme/offline/github/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/master/white/PITCHME.zip
+unzip PITCHME.zip
+cd PITCHME
+python -m SimpleHTTPServer
+firefox http://localhost:8000
+```
+
+Press `S` to open popup with notes.
+
 ## Demo
 
 See [Step 1](step1/)
