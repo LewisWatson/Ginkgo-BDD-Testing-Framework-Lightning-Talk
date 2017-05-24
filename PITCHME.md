@@ -14,35 +14,39 @@
 
 Note:
 
-Explain that BDD is a style of TDD that focuses on how a system should behave.
+Explain that BDD is a style of TDD that focuses on how a system should behave. Adopts an outside in view for writing behavioural specifications.
 
 TDD is out of scope for this talk.
 
----
++++
 
 ## Example
 
 ```plain
+Scenario: In order to maximise our enjoyment of apples, we need to eat them two at a time.
 Given: 5 apples
 When: I eat 2 apples
-Then: I expect to be left with 3 apples, and two apple cores.
+Then: I should have 3 apples
+Then: I should have 2 apple cores.
 ```
 
 Note:
 
-Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by a Golang microsevice. The test describes the behaviour and expected goal using an english style description.
+By convention BDD generally focus on desired outcomes using less technical, and more natual language.
+
+Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by a Golang microsevice. The test describes the behaviour and expected goal using an english style description. Although there is nothing to stop us using some technical langauge, depending on the intended audience.
 
 ---
 
 ## When to use BDD
 
-- Working with non-technical stakeholders
-- Want descriptive, specification style tests
-- Useful way to tease out edge cases.
+- Working with stakeholders with differeing specialities
+- For more descriptive, specification style tests
+- Useful way to structure tests and tease out edge cases
 
 Note:
 
-## Working with non-technical stakeholders
+## Working with stakeholders with differing specialities
 
 Non-technical stakeholders at least have a chance of understanding and being able to talk about BDD style tests. Requirements could also be captured in this style and directly implemeneted as tests.
 
@@ -56,7 +60,7 @@ BDD tools can leverage given, when, then style of the tests to provide context w
 
 ## Useful way to tease out edge cases
 
-At the very least it is a useful methodology for working through the bahaviour of the system. Once you have sone test it is relatively easy to think of additional `when`'s for the `given`'s.
+At the very least it is a useful methodology for working through the behaviour of the system. Once you have some tests it is relatively easy to think of additional `when`'s for the `given`'s.
 
 +++
 
@@ -64,6 +68,10 @@ At the very least it is a useful methodology for working through the bahaviour o
 
 - If you want compact and succinct tests.
 - If you want to quickly test something very low level and technical.
+
+---
+
+## Golang BDD
 
 +++
 
@@ -76,7 +84,7 @@ At the very least it is a useful methodology for working through the bahaviour o
 - https://github.com/LewisWatson/carshare-back/
 - https://github.com/LewisWatson/firebase-jwt-auth
 
----
++++
 
 ## BDD options in Golang
 
@@ -89,6 +97,6 @@ Lots of options, but the main ones are
 
 --- 
 
-# Ginko Demo
+## Demo
 
 ![ginko logo](https://onsi.github.io/ginkgo/images/ginkgo.png)
