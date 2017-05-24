@@ -9,12 +9,10 @@
 ## Behaviour Driven Development
 
 - A particular style of **T**est **D**riven **D**evelopment
-- Focuses on expected *behaviour* of a system
+- Adopts outside in view that focuses on expected *behaviour* of a system
 - Uses more natural english style language
 
 Note:
-
-Explain that BDD is a style of TDD that focuses on how a system should behave. Adopts an outside in view for writing behavioural specifications.
 
 TDD is out of scope for this talk.
 
@@ -22,21 +20,30 @@ TDD is out of scope for this talk.
 
 ## Example
 
+
 **Scenario** In order to maximise our enjoyment of apples, we need to eat them two at a time.
 
-**Given** 5 apples
-
-**When** I eat 2 apples
-
-**Then** I should have 3 apples
-
-**Then** I should have 2 apple cores.
+```
+Given 5 apples
+When I eat 2 apples
+Then I should have 3 apples
+Then I should have 2 apple cores
+```
 
 Note:
 
 By convention BDD generally focus on desired outcomes using less technical, and more natual language.
 
-Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by a Golang microsevice. The test describes the behaviour and expected goal using an english style description. Although there is nothing to stop us using some technical langauge, depending on the intended audience.
+Doesn't matter if the apple lives inside MongoDB, or that the apple gets eaten by a Golang microsevice. The test describes the behaviour and expected goal using an english style description. 
+
+Stakeholder views
+
+- Developers might think apples are rows in a MySQL db, accessed by Golang Microservices
+- Algorithm engineers might think apples are somoe sort of mathematical concept in matlab.
+- The client might think that apples are apples, and that everyone else is crazy.
+
+
+Although there is nothing to stop us using some technical langauge, tailored to a particular audience.
 
 ---
 
