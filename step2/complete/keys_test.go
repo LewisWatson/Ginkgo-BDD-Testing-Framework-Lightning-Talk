@@ -1,7 +1,7 @@
 package keys_test
 
 import (
-	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2"
+	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2/complete"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -37,23 +37,20 @@ var _ = Describe("Keys", func() {
 		tokens, maxAge, err = GetKeys("keys.url", givenTokens, givenMaxAge, nil)
 	})
 
-	/*
-	 * then
-	 */
-
 	It("should not return an error", func() {
-		Expect(err).ToNot(HaveOccurred())
+		Expect(err).NotTo(HaveOccurred())
 	})
 
-	It("should return a max age greater than 1000", func() {
-		Expect(maxAge).To(BeNumerically(">", 1000))
+	It("should return a maxAge greater than 10", func() {
+		Expect(maxAge).To(BeNumerically(">", 10))
 	})
 
-	It("should return the expected tokens", func() {
+	It("should return the correct key map", func() {
 		Expect(tokens).To(Equal(givenTokens))
 	})
 
 	It("should not return the bad token", func() {
-		Expect(tokens).NotTo(ContainElement("bad token"))
+		Expect(tokens).ToNot(ContainElement("bad token"))
 	})
+
 })
