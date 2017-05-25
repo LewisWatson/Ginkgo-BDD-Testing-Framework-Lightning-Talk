@@ -18,7 +18,9 @@ var _ = Describe("Keys", func() {
 
 	BeforeEach(func() {
 
-		// given
+		/*
+		 * given
+		 */
 
 		givenTokens = make(map[string]interface{})
 		givenTokens["key1"] = "fdjslkdfjfdsalfjds"
@@ -28,12 +30,16 @@ var _ = Describe("Keys", func() {
 
 		givenMaxAge := int64(1001)
 
-		// when
+		/*
+		 * when
+		 */
 
 		tokens, maxAge, err = GetKeys("keys.url", givenTokens, givenMaxAge, nil)
 	})
 
-	//then
+	/*
+	 * then
+	 */
 
 	It("should not return an error", func() {
 		Expect(err).ToNot(HaveOccurred())

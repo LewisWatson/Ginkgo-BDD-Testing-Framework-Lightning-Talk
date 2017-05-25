@@ -21,18 +21,28 @@ var _ = Describe("Keys", func() {
 
 	BeforeEach(func() {
 
-		if serverTokens == nil {
+		/*
+		 * given
+		 */
 
-			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
-				fmt.Fprintln(w, jsonKeys)
-			}))
-			defer ts.Close()
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
+			fmt.Fprintln(w, jsonKeys)
+		}))
+		defer ts.Close()
 
-			serverTokens = make(map[string]interface{})
-			maxAge, err = GetKeys(serverTokens, ts.URL)
-		}
+		url := ts.URL
+
+		/*
+		 * when
+		 */
+
+		serverTokens, maxAge, err = GetKeys(url)
 	})
+
+	/*
+	 * then
+	 */
 
 	It("should not throw an error", func() {
 		Expect(err).NotTo(HaveOccurred())
@@ -50,14 +60,28 @@ var _ = Describe("Keys", func() {
 
 		BeforeEach(func() {
 
+			/*
+			 * given
+			 */
+
 			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 				w.Header().Set(HeaderCacheControl, "something other than max age")
 				fmt.Fprintln(w, jsonKeys)
 			}))
 			defer ts.Close()
-			serverTokens = make(map[string]interface{})
-			maxAge, err = GetKeys(serverTokens, ts.URL)
+
+			url := ts.URL
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
 		})
+
+		/*
+		 * then
+		 */
 
 		It("should return an ErrCacheControlHeaderLacksMaxAge error", func() {
 			Expect(err).To(Equal(ErrCacheControlHeaderLacksMaxAge))
@@ -68,9 +92,23 @@ var _ = Describe("Keys", func() {
 	Context("no server response", func() {
 
 		BeforeEach(func() {
-			serverTokens = make(map[string]interface{})
-			maxAge, err = GetKeys(serverTokens, "https://notgonnaresolvem0nkeygirrage.org")
+
+			/*
+			 * given
+			 */
+
+			url := "url-to-nowhere.sdlafsdale4.org.uk.net"
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
 		})
+
+		/*
+		 * then
+		 */
 
 		It("should return an error", func() {
 			Expect(err).To(HaveOccurred())

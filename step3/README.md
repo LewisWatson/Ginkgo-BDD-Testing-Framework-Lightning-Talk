@@ -12,4 +12,4 @@ Two "what if"'s are identified
 
 ## Then
 
-Create tests for the what is using scenarios.
+Create tests for the "what if"s using scenarios.

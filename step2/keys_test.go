@@ -44,16 +44,4 @@ var _ = Describe("Keys", func() {
 	It("should not return an error", func() {
 		Expect(err).ToNot(HaveOccurred())
 	})
-
-	It("should return a max age greater than 1000", func() {
-		Expect(maxAge).To(BeNumerically(">", 1000))
-	})
-
-	It("should return the expected tokens", func() {
-		Expect(tokens).To(Equal(givenTokens))
-	})
-
-	It("should not return the bad token", func() {
-		Expect(tokens).NotTo(ContainElement("bad token"))
-	})
 })
