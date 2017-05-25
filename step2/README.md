@@ -1,25 +1,7 @@
 # Step 2
 
-## Given
-Output of step 1
+The code under test have been changed so that we can control what it returns.
 
-## When
-Create Ginkgo suite
-
-```bash
-$ ginkgo bootstrap
-Generating ginkgo test suite bootstrap for keys in:
-        step1_suite_test.go
-```
-
-```bash
-$ ginkgo generate keys
-Generating ginkgo test for Keys in:
-  keys_test.go
-```
-
-## Then
-
-Create a simple test to ensure no errors are returned
+Lets expand the tests to demonstate some more matchers.
 
 [Continue to step 3](../step3)

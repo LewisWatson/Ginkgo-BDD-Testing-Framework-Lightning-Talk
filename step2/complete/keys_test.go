@@ -1,7 +1,7 @@
 package keys_test
 
 import (
-	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2/complete"
+	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -10,33 +10,44 @@ import (
 var _ = Describe("Keys", func() {
 
 	var (
-		keyURL       = "blah.org"
-		keys         map[string]interface{}
-		maxAge       int64
-		err          error
-		expectedKeys map[string]interface{}
+		tokens      map[string]interface{}
+		maxAge      int64
+		err         error
+		givenTokens map[string]interface{}
 	)
 
 	BeforeEach(func() {
 
-		expectedKeys = make(map[string]interface{})
-		expectedKeys["key1"] = "fdjslkdfjfdsalfjds"
-		expectedKeys["key2"] = "dsfjasdlfjdsaflkdj"
-		expectedKeys["key3"] = "klfjdsalfjdsalkjfd"
+		// given
 
-		keys, maxAge, err = GetKeys(keyURL)
+		givenTokens = make(map[string]interface{})
+		givenTokens["key1"] = "fdjslkdfjfdsalfjds"
+		givenTokens["key2"] = "dsfjasdlfjdsaflkdj"
+		givenTokens["key3"] = "klfjdsalfjdsalkjfd"
+		// givenTokens["bad token"] = "bad token"
+
+		givenMaxAge := int64(1001)
+
+		// when
+
+		tokens, maxAge, err = GetKeys("keys.url", givenTokens, givenMaxAge, nil)
 	})
+
+	//then
 
 	It("should not return an error", func() {
-		Expect(err).NotTo(HaveOccurred())
+		Expect(err).ToNot(HaveOccurred())
 	})
 
-	It("should return the correct maxAge", func() {
-		Expect(maxAge).To(Equal(int64(1000)))
+	It("should return a max age greater than 1000", func() {
+		Expect(maxAge).To(BeNumerically(">", 1000))
 	})
 
-	It("should return the correct key map", func() {
-		Expect(keys).To(Equal(expectedKeys))
+	It("should return the expected tokens", func() {
+		Expect(tokens).To(Equal(givenTokens))
 	})
 
+	It("should not return the bad token", func() {
+		Expect(tokens).NotTo(ContainElement("bad token"))
+	})
 })

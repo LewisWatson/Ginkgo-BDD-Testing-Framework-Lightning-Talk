@@ -21,18 +21,28 @@ var _ = Describe("Keys", func() {
 
 	BeforeEach(func() {
 
-		if serverTokens == nil {
+		/*
+		 * given
+		 */
 
-			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
-				fmt.Fprintln(w, jsonKeys)
-			}))
-			defer ts.Close()
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
+			fmt.Fprintln(w, jsonKeys)
+		}))
+		defer ts.Close()
 
-			serverTokens = make(map[string]interface{})
-			maxAge, err = GetKeys(serverTokens, ts.URL)
-		}
+		url := ts.URL
+
+		/*
+		 * when
+		 */
+
+		serverTokens, maxAge, err = GetKeys(url)
 	})
+
+	/*
+	 * then
+	 */
 
 	It("should not throw an error", func() {
 		Expect(err).NotTo(HaveOccurred())
@@ -44,6 +54,66 @@ var _ = Describe("Keys", func() {
 
 	It("should populate serverTokens with four keys", func() {
 		Expect(len(serverTokens)).To(Equal(4))
+	})
+
+	Context("key server response does not contain max-age", func() {
+
+		BeforeEach(func() {
+
+			/*
+			 * given
+			 */
+
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set(HeaderCacheControl, "something other than max age")
+				fmt.Fprintln(w, jsonKeys)
+			}))
+			defer ts.Close()
+
+			url := ts.URL
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
+		})
+
+		/*
+		 * then
+		 */
+
+		It("should return an ErrCacheControlHeaderLacksMaxAge error", func() {
+			Expect(err).To(Equal(ErrCacheControlHeaderLacksMaxAge))
+		})
+
+	})
+
+	Context("no server response", func() {
+
+		BeforeEach(func() {
+
+			/*
+			 * given
+			 */
+
+			url := "url-to-nowhere.sdlafsdale4.org.uk.net"
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
+		})
+
+		/*
+		 * then
+		 */
+
+		It("should return an error", func() {
+			Expect(err).To(HaveOccurred())
+		})
+
 	})
 
 })

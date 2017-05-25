@@ -22,17 +22,22 @@ var myClient = &http.Client{Timeout: 30 * time.Second}
 
 // GetKeys client tokens must be signed by one of the server keys provided via a url.
 // The keys expire after a certain amount of time so we need to track that also.
-func GetKeys(tokens map[string]interface{}, keyURL string) (int64, error) {
+func GetKeys(keyURL string) (tokens map[string]interface{}, maxAge int64, err error) {
+
 	r, err := myClient.Get(keyURL)
 	if err != nil {
-		return 0, err
-	}
-	maxAge, err := extractMaxAge(r.Header.Get(HeaderCacheControl))
-	if err != nil {
-		return maxAge, err
+		return tokens, maxAge, err
 	}
 	defer r.Body.Close()
-	return maxAge, json.NewDecoder(r.Body).Decode(&tokens)
+
+	maxAge, err = extractMaxAge(r.Header.Get(HeaderCacheControl))
+	if err != nil {
+		return tokens, maxAge, err
+	}
+
+	err = json.NewDecoder(r.Body).Decode(&tokens)
+
+	return tokens, maxAge, err
 }
 
 // Extract the max age from the cache control response header value
