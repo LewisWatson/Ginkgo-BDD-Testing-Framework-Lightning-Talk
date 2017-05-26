@@ -11,9 +11,6 @@ import (
 
 var (
 	jsonKeys  string
-	jsonKeys2 string
-	token     string
-	token2    string
 )
 
 func TestKeys(t *testing.T) {
