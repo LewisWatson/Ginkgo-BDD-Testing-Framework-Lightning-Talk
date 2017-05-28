@@ -1,15 +1,7 @@
 # Step 3
 
-## Given
+Now we have a fleshed out implementation of keys.go and a more sophisticated keys_test.go
 
-A fleshed out implementation of keys.go and a more sophisticated keys_test.go
+Create some more tests to ensure that a max age and correct number of key tokens are returned.
 
-## When
-
-Two "what if"'s are identified
- * what if the key server response does not contain max-age
- * what if there is no server response
-
-## Then
-
-Create tests for the "what if"s using scenarios.
+Then, create two additional contexts to text for invalid response containing no maxAge, or no response at all.

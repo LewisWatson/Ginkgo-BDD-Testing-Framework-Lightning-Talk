@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	jsonKeys  string
+	jsonKeys string
 )
 
 func TestKeys(t *testing.T) {

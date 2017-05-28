@@ -44,9 +44,9 @@ func GetKeys(keyURL string) (tokens map[string]interface{}, maxAge int64, err er
 func extractMaxAge(cacheControl string) (int64, error) {
 	// "..., max-age=19008, ..."" to ["..., max-age="]["19008, ..."]
 	tokens := strings.Split(cacheControl, "max-age=")
-	if len(tokens) == 1 {
-		return 0, ErrCacheControlHeaderLacksMaxAge
-	}
+	// if len(tokens) == 1 {
+	// 	return 0, ErrCacheControlHeaderLacksMaxAge
+	// }
 	// "19008, ..." to ["19008"][" ..."]
 	tokens2 := strings.Split(tokens[1], ",")
 	// convert "19008" to int64
