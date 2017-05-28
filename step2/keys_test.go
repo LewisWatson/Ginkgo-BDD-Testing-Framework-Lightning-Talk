@@ -1,6 +1,10 @@
 package keys_test
 
 import (
+	"fmt"
+	"net/http"
+	"net/http/httptest"
+
 	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2"
 
 	. "github.com/onsi/ginkgo"
@@ -10,10 +14,9 @@ import (
 var _ = Describe("Keys", func() {
 
 	var (
-		tokens      map[string]interface{}
-		maxAge      int64
-		err         error
-		givenTokens map[string]interface{}
+		maxAge       int64
+		err          error
+		serverTokens map[string]interface{}
 	)
 
 	BeforeEach(func() {
@@ -22,38 +25,27 @@ var _ = Describe("Keys", func() {
 		 * given
 		 */
 
-		givenTokens = make(map[string]interface{})
-		givenTokens["key1"] = "fdjslkdfjfdsalfjds"
-		givenTokens["key2"] = "dsfjasdlfjdsaflkdj"
-		givenTokens["key3"] = "klfjdsalfjdsalkjfd"
-		// givenTokens["bad token"] = "bad token"
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
+			fmt.Fprintln(w, jsonKeys)
+		}))
+		defer ts.Close()
 
-		givenMaxAge := int64(1001)
+		url := ts.URL
 
 		/*
 		 * when
 		 */
 
-		tokens, maxAge, err = GetKeys("keys.url", givenTokens, givenMaxAge, nil)
+		serverTokens, maxAge, err = GetKeys(url)
 	})
 
 	/*
 	 * then
 	 */
 
-	It("should not return an error", func() {
-		Expect(err).ToNot(HaveOccurred())
+	It("should not throw an error", func() {
+		Expect(err).NotTo(HaveOccurred())
 	})
 
-	It("should return a max age greater than 1000", func() {
-		Expect(maxAge).To(BeNumerically(">", 1000))
-	})
-
-	It("should return the expected tokens", func() {
-		Expect(tokens).To(Equal(givenTokens))
-	})
-
-	It("should not return the bad token", func() {
-		Expect(tokens).NotTo(ContainElement("bad token"))
-	})
 })

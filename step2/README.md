@@ -1,7 +1,7 @@
-# Step 2
+# Step 3
 
-The code under test have been changed so that we can control what it returns.
+Now we have a fleshed out implementation of keys.go and a more sophisticated keys_test.go
 
-Lets expand the tests to demonstate some more matchers.
+Create some more tests to ensure that a max age and correct number of key tokens are returned.
 
-[Continue to step 3](../step3)
+Then, create two additional contexts to text for invalid response containing no maxAge, or no response at all.

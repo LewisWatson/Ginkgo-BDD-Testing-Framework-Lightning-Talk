@@ -10,18 +10,17 @@ import (
 var _ = Describe("Keys", func() {
 
 	var (
-		keyURL = "blah.org"
-		// keys map[string]interface{}
-		// maxAge int64
-		err error
+		tokens map[string]interface{}
+		maxAge int64
+		err    error
 	)
 
 	BeforeEach(func() {
-		_, _, err = GetKeys(keyURL)
+		tokens, maxAge, err = GetKeys("keys.url")
 	})
 
 	It("should not return an error", func() {
-		Expect(err).NotTo(HaveOccurred())
+		Expect(err).ToNot(HaveOccurred())
 	})
 
 })
