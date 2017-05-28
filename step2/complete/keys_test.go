@@ -1,7 +1,11 @@
 package keys_test
 
 import (
-	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2/complete"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
+
+	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step3/complete"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
@@ -10,10 +14,9 @@ import (
 var _ = Describe("Keys", func() {
 
 	var (
-		tokens      map[string]interface{}
-		maxAge      int64
-		err         error
-		givenTokens map[string]interface{}
+		maxAge       int64
+		err          error
+		serverTokens map[string]interface{}
 	)
 
 	BeforeEach(func() {
@@ -22,35 +25,95 @@ var _ = Describe("Keys", func() {
 		 * given
 		 */
 
-		givenTokens = make(map[string]interface{})
-		givenTokens["key1"] = "fdjslkdfjfdsalfjds"
-		givenTokens["key2"] = "dsfjasdlfjdsaflkdj"
-		givenTokens["key3"] = "klfjdsalfjdsalkjfd"
-		// givenTokens["bad token"] = "bad token"
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set(HeaderCacheControl, "..., max-age=19008, ...")
+			fmt.Fprintln(w, jsonKeys)
+		}))
+		defer ts.Close()
 
-		givenMaxAge := int64(1001)
+		url := ts.URL
 
 		/*
 		 * when
 		 */
 
-		tokens, maxAge, err = GetKeys("keys.url", givenTokens, givenMaxAge, nil)
+		serverTokens, maxAge, err = GetKeys(url)
 	})
 
-	It("should not return an error", func() {
+	/*
+	 * then
+	 */
+
+	It("should not throw an error", func() {
 		Expect(err).NotTo(HaveOccurred())
 	})
 
-	It("should return a maxAge greater than 10", func() {
-		Expect(maxAge).To(BeNumerically(">", 10))
+	It("should extract maxAge from response header", func() {
+		Expect(maxAge).To(Equal(int64(19008)))
 	})
 
-	It("should return the correct key map", func() {
-		Expect(tokens).To(Equal(givenTokens))
+	It("should populate serverTokens with four keys", func() {
+		Expect(len(serverTokens)).To(Equal(4))
 	})
 
-	It("should not return the bad token", func() {
-		Expect(tokens).ToNot(ContainElement("bad token"))
+	Context("key server response does not contain max-age", func() {
+
+		BeforeEach(func() {
+
+			/*
+			 * given
+			 */
+
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set(HeaderCacheControl, "something other than max age")
+				fmt.Fprintln(w, jsonKeys)
+			}))
+			defer ts.Close()
+
+			url := ts.URL
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
+		})
+
+		/*
+		 * then
+		 */
+
+		It("should return an ErrCacheControlHeaderLacksMaxAge error", func() {
+			Expect(err).To(Equal(ErrCacheControlHeaderLacksMaxAge))
+		})
+
+	})
+
+	Context("no server response", func() {
+
+		BeforeEach(func() {
+
+			/*
+			 * given
+			 */
+
+			url := "url-to-nowhere.sdlafsdale4.org.uk.net"
+
+			/*
+			 * when
+			 */
+
+			serverTokens, maxAge, err = GetKeys(url)
+		})
+
+		/*
+		 * then
+		 */
+
+		It("should return an error", func() {
+			Expect(err).To(HaveOccurred())
+		})
+
 	})
 
 })

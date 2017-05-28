@@ -1,7 +1,15 @@
-# Step 2
+# Step 3
 
-The code under test have been changed so that we can control what it returns.
+## Given
 
-Lets expand the tests to demonstate some more matchers.
+A fleshed out implementation of keys.go and a more sophisticated keys_test.go
 
-[Continue to step 3](../step3)
+## When
+
+Two "what if"'s are identified
+ * what if the key server response does not contain max-age
+ * what if there is no server response
+
+## Then
+
+Create tests for the "what if"s using scenarios.
