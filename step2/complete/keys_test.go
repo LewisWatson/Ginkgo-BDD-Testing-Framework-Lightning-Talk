@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"net/http/httptest"
 
-	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2"
+	. "github.com/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/step2/complete"
 
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
