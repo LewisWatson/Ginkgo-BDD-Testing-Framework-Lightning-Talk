@@ -16,7 +16,7 @@ Download the zip from gitpitch. Extract to a directory then run from a web serve
 wget https://gitpitch.com/pitchme/offline/github/LewisWatson/Ginkgo-BDD-Testing-Framework-Lightning-Talk/master/white/PITCHME.zip
 unzip PITCHME.zip
 cd PITCHME
-python -m SimpleHTTPServer
+python -m http.server
 firefox http://localhost:8000
 ```
 
